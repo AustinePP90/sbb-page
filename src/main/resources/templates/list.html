@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>리스트</title>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+</head>
+<body>
+	<div class="container">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">WORD</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="item:${pageDTO.content}">
+					<th scope="row" th:text="${item.id}"></th>
+					<td th:text="${item.word}"></td>
+				</tr>
+			</tbody>
+		</table>
+	
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<li class="page-item" th:classappend="${pageDTO.page == 1} ? 'disabled'">
+					<a class="page-link" th:href="@{/words(page=${pageDTO.page - 1}, size=${pageDTO.size})}">Previous</a>
+				</li>
+				<li class="page-item" th:each="pageNum:${#numbers.sequence(1, pageDTO.totalPages)}"
+				 th:classappend="${pageNum == pageDTO.page} ? 'active'">
+					<a class="page-link" th:href="@{/words(page=${pageNum}, size=${pageDTO.size})}" th:text="${pageNum}"></a>
+				</li>
+				<li class="page-item" th:classappend="${pageDTO.page == pageDTO.totalPages} ? 'disabled'">
+					<a class="page-link" th:href="@{/words(page=${pageDTO.page + 1}, size=${pageDTO.size})}">Next</a>
+				</li>
+			</ul>
+		</nav>
+
+	</div>
+
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -14,9 +14,15 @@ public class WordService {
 		return wordMapper.getWordById(id);
 	}
 	
-	public List<Word> getWordList(int page, int size) {
+	public PageDTO getWordList(int page, int size) {
 		int offset = (page -1) * size;
 		
-		return wordMapper.getWordList(offset, size);
+		List<Word> content = wordMapper.getWordList(offset, size);
+		int totalElements = wordMapper.countTotal();
+		int totalPages = (int) Math.ceil((double) totalElements / size);
+		
+		PageDTO pageDTO = new PageDTO(page, size, totalPages, totalElements, content);
+		
+		return pageDTO;
 	}
 }

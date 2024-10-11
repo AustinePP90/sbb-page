@@ -6,6 +6,10 @@
 	</select>
 	
 	<select id="getWordList" resultType="com.mysite.sbbpage.Word">
-		SELECT id, word FROM page_tb ORDER BY id DESC LIMIT #{size} OFFSET #{offset};
+		SELECT id, word FROM page_tb ORDER BY id DESC LIMIT #{size} OFFSET #{offset}
+	</select>
+	
+	<select id="countTotal" resultType="Integer">
+		SELECT COUNT(*) FROM page_tb
 	</select>
 </mapper>

@@ -10,4 +10,6 @@ public interface WordMapper {
 	Word getWordById(Integer id);
 	
 	List<Word> getWordList(@Param("offset") int offset, @Param("size") int size);
+	
+	Integer countTotal();
 }
